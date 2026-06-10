@@ -1,0 +1,21 @@
+# deps
+node_modules/
+.pnpm-store/
+
+# next
+.next/
+out/
+build/
+
+# env — never commit secrets
+.env
+.env.local
+.env*.local
+
+# prisma
+prisma/dev.db
+
+# misc
+.DS_Store
+*.log
+.vercel

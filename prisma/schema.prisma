@@ -1,0 +1,124 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Customer {
+  id            String    @id @default(cuid())
+  name          String
+  email         String    @unique
+  phone         String?
+  city          String?
+  totalSpend    Float     @default(0) @map("total_spend")
+  orderCount    Int       @default(0) @map("order_count")
+  lastOrderAt   DateTime? @map("last_order_at")
+  tags          String[]  @default([])
+  status        String    @default("active")
+  createdAt     DateTime  @default(now()) @map("created_at")
+
+  orders               Order[]
+  campaignAudiences    CampaignAudience[]
+  communications       Communication[]
+
+  @@index([status])
+  @@index([totalSpend])
+  @@index([lastOrderAt])
+  @@map("customers")
+}
+
+model Order {
+  id         String   @id @default(cuid())
+  customerId String   @map("customer_id")
+  amount     Float
+  status     String   @default("completed")
+  items      Json     @default("[]")
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  customer Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+
+  @@index([customerId])
+  @@index([createdAt])
+  @@map("orders")
+}
+
+model Campaign {
+  id              String    @id @default(cuid())
+  name            String
+  status          String    @default("draft")
+  channel         String    @default("email")
+  aiBrief         String?   @map("ai_brief")
+  aiStrategy      Json?     @map("ai_strategy")
+  segmentRules    Json?     @map("segment_rules")
+  audienceSize    Int       @default(0) @map("audience_size")
+  messageTemplate String    @default("") @map("message_template")
+  launchedAt      DateTime? @map("launched_at")
+  createdAt       DateTime  @default(now()) @map("created_at")
+
+  audiences      CampaignAudience[]
+  communications Communication[]
+
+  @@index([status])
+  @@index([createdAt])
+  @@map("campaigns")
+}
+
+model CampaignAudience {
+  id         String @id @default(cuid())
+  campaignId String @map("campaign_id")
+  customerId String @map("customer_id")
+
+  campaign Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  customer Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+
+  @@unique([campaignId, customerId])
+  @@index([campaignId])
+  @@map("campaign_audiences")
+}
+
+model Communication {
+  id         String   @id @default(cuid())
+  campaignId String   @map("campaign_id")
+  customerId String   @map("customer_id")
+  channel    String
+  message    String
+  status     String   @default("queued")
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+
+  campaign Campaign             @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  customer Customer             @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  events   CommunicationEvent[]
+
+  @@index([campaignId])
+  @@index([customerId])
+  @@index([status])
+  @@map("communications")
+}
+
+model CommunicationEvent {
+  id              String   @id @default(cuid())
+  communicationId String   @map("communication_id")
+  eventType       String   @map("event_type")
+  occurredAt      DateTime @default(now()) @map("occurred_at")
+  metadata        Json     @default("{}")
+
+  communication Communication @relation(fields: [communicationId], references: [id], onDelete: Cascade)
+
+  @@index([communicationId])
+  @@index([eventType])
+  @@map("communication_events")
+}
+
+model AiSuggestion {
+  id        String   @id @default(cuid())
+  brief     String
+  strategy  Json
+  variants  Json
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("ai_suggestions")
+}
+
