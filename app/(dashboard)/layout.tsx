@@ -1,11 +1,11 @@
-export default function DashboardLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+import { NavShell } from '@/components/layout/nav-shell'
+import { ScrollProgress } from '@/components/layout/scroll-progress'
+
+export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen bg-[#F9FAFB]">
-      {children}
-    </div>
+    <>
+      <ScrollProgress />
+      <NavShell>{children}</NavShell>
+    </>
   )
 }

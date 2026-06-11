@@ -77,3 +77,28 @@ body {
   border-radius: var(--radius);
   box-shadow: var(--shadow-card);
 }
+/* Display font — Plus Jakarta Sans for headings */
+.font-display {
+  font-family: var(--font-display), system-ui, sans-serif;
+}
+
+/* Stat number style */
+.stat-number {
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+/* Nav item */
+.nav-item {
+  @apply flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-150;
+}
+
+.nav-item-active {
+  @apply bg-brand-50 text-brand-600;
+}
+
+.nav-item-inactive {
+  @apply text-gray-500 hover:text-gray-900 hover:bg-gray-100;
+}
