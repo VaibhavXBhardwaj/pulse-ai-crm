@@ -19,3 +19,4 @@ prisma/dev.db
 .DS_Store
 *.log
 .vercel
+.vercel
