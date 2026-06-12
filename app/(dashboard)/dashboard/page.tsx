@@ -636,8 +636,7 @@ export default function DashboardPage() {
                         <div
                           className="w-8 h-8 rounded-full flex items-center justify-center shrink-0 ring-1"
                           style={{
-                            background: 'linear-gradient(135deg, #EDE9FE, #EEF2FF)',
-                            ringColor: 'rgba(139,92,246,0.15)',
+                            background: 'linear-gradient(135deg, #EDE9FE, #EEF2FF)'
                           }}
                         >
                           <span className="text-[10px] font-bold text-indigo-600">
@@ -717,8 +716,8 @@ export default function DashboardPage() {
                             <div
                               className="w-8 h-8 rounded-full flex items-center justify-center shrink-0 ring-1"
                               style={{
-                                background: 'linear-gradient(135deg, #EEF2FF, #EDE9FE)',
-                                ringColor: 'rgba(99,102,241,0.18)',
+                                background: 'linear-gradient(135deg, #EEF2FF, #EDE9FE)'
+                                
                               }}
                             >
                               <span className="text-[10px] font-bold text-indigo-600">

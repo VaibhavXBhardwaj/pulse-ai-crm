@@ -122,4 +122,3 @@ model AiSuggestion {
 
   @@map("ai_suggestions")
 }
-
