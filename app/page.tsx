@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
+import BackgroundPath from '@/components/BackgroundPath'
 import { motion } from 'framer-motion'
 import {
   ArrowRight, Zap, Users, Megaphone, BarChart3,
@@ -86,13 +87,19 @@ export default function LandingPage() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-white text-gray-900">
+  <div className="min-h-screen bg-[#FAFBFF] text-slate-900 overflow-hidden relative">
+     <BackgroundPath />
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+  <div className="absolute top-0 left-1/3 h-[700px] w-[700px] rounded-full bg-violet-200/40 blur-[150px]" />
+  <div className="absolute top-40 right-0 h-[600px] w-[600px] rounded-full bg-cyan-200/40 blur-[150px]" />
+  <div className="absolute bottom-0 left-0 h-[600px] w-[600px] rounded-full bg-indigo-200/30 blur-[180px]" />
+</div>
       {/* Navbar */}
       <header className={cn(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-200',
         scrolled ? 'bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm' : 'bg-transparent'
       )}>
-        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-8 h-20 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2.5">
             <div className="w-8 h-8 rounded-lg bg-[#6366F1] flex items-center justify-center">
               <Zap className="w-4 h-4 text-white" strokeWidth={2.5} />
@@ -162,8 +169,8 @@ export default function LandingPage() {
       </header>
 
       {/* Hero */}
-      <section className="pt-32 pb-20 px-6">
-        <div className="max-w-6xl mx-auto">
+      <section className="pt-44 pb-32 px-6 relative">
+        <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
@@ -174,12 +181,12 @@ export default function LandingPage() {
               <span className="w-1.5 h-1.5 rounded-full bg-[#6366F1]" />
               AI-Native CRM for Indian Retail
             </div>
-            <h1 className="font-display font-bold text-5xl lg:text-6xl text-gray-900 tracking-tight leading-[1.08] mb-6">
+            <h1 className="font-display font-black text-7xl lg:text-[88px] text-slate-950 tracking-[-0.06em] leading-[0.95] mb-8">
               Reach every shopper
               <br />
-              <span className="text-[#6366F1]">at the right moment.</span>
+              <span className="bg-gradient-to-r from-violet-600 via-indigo-500 to-cyan-500 bg-clip-text text-transparent">at the right moment.</span>
             </h1>
-            <p className="text-lg text-gray-500 leading-relaxed max-w-xl mb-8">
+            <p className="text-xl text-slate-600 leading-9 max-w-2xl mb-10">
               PulseAI turns your customer data into targeted campaigns. Describe your goal in plain language — the AI builds the audience, crafts the message, and measures what works.
             </p>
             <div className="flex flex-wrap items-center gap-3">
@@ -209,7 +216,7 @@ export default function LandingPage() {
             transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
             className="mt-16 relative"
           >
-            <div className="rounded-2xl border border-gray-200 bg-white shadow-modal overflow-hidden">
+            <div className="rounded-[36px] border border-white/60 bg-white/80 backdrop-blur-xl shadow-[0_40px_100px_rgba(15,23,42,0.12)] overflow-hidden">
               {/* Browser chrome */}
               <div className="h-10 bg-gray-50 border-b border-gray-100 flex items-center px-4 gap-2">
                 <div className="flex items-center gap-1.5">
@@ -273,21 +280,21 @@ export default function LandingPage() {
               </div>
             </div>
             {/* Glow */}
-            <div className="absolute -inset-4 bg-[#6366F1]/5 rounded-3xl -z-10 blur-2xl" />
+            <div className="absolute -inset-20 bg-gradient-to-r from-violet-300/30 via-indigo-300/20 to-cyan-300/30 rounded-full blur-[120px] -z-10" />
           </motion.div>
         </div>
       </section>
 
       {/* Metrics strip */}
-      <section className="py-12 border-y border-gray-100 bg-gray-50/50">
+      <section className="py-24 border-y border-slate-100 bg-white">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {METRICS.map((metric) => (
               <div key={metric.label} className="text-center">
-                <div className="font-display font-bold text-3xl text-gray-900 tracking-tight mb-1">
+                <div className="font-display font-bold text-5xl text-gray-900 tracking-tight mb-1">
                   {metric.value}
                 </div>
-                <div className="text-sm text-gray-500">{metric.label}</div>
+                <div className="text-sm text-gray-300">{metric.label}</div>
               </div>
             ))}
           </div>
@@ -295,7 +302,7 @@ export default function LandingPage() {
       </section>
 
       {/* Features */}
-      <section id="features" className="py-24 px-6">
+      <section id="features" className="py-32 px-6">
         <div className="max-w-6xl mx-auto">
           <div className="max-w-2xl mb-16">
             <div className="text-xs font-semibold text-[#6366F1] uppercase tracking-widest mb-3">
@@ -317,7 +324,7 @@ export default function LandingPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: i * 0.08, ease: 'easeOut' }}
-                className="group p-6 rounded-2xl border border-gray-100 bg-white hover:border-[#6366F1]/20 hover:shadow-card transition-all duration-200"
+                className="group p-8 rounded-[28px] border border-white/60 bg-white/80 backdrop-blur-xl shadow-[0_10px_30px_rgba(15,23,42,0.05)] hover:border-violet-200 hover:-translate-y-2 hover:shadow-[0_25px_60px_rgba(99,102,241,0.12)] transition-all duration-300"
               >
                 <div className="w-9 h-9 rounded-xl border border-gray-100 bg-gray-50 flex items-center justify-center mb-4 group-hover:bg-[#EEF2FF] group-hover:border-[#6366F1]/20 transition-colors">
                   <feature.icon className="w-4.5 h-4.5 text-gray-500 group-hover:text-[#6366F1] transition-colors" strokeWidth={1.5} />
@@ -448,12 +455,12 @@ export default function LandingPage() {
       </section>
 
       {/* Final CTA */}
-      <section className="py-24 px-6 border-t border-gray-100">
-        <div className="max-w-2xl mx-auto text-center">
-          <h2 className="font-display font-bold text-4xl text-gray-900 tracking-tight mb-4">
+      <section className="py-32 px-6">
+        <div className="max-w-5xl mx-auto text-center rounded-[40px] bg-gradient-to-br from-slate-950 via-indigo-950 to-slate-950 px-12 py-24 text-white shadow-[0_40px_120px_rgba(15,23,42,0.3)]">
+          <h2 className="font-display font-bold text-4xl text-white tracking-tight mb-4">
             Start reaching your customers smarter.
           </h2>
-          <p className="text-gray-500 mb-8">
+          <p className="text-gray-300 mb-8">
             Join thousands of Indian retail brands using PulseAI to run intelligent campaigns.
           </p>
           <Link
